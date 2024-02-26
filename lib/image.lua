@@ -1,7 +1,7 @@
 local fs = require("filesystem")
 local unicode = require("unicode")
 local gpu = require("component").gpu
-
+local ecs = require("ECSAPI")
 local image = {}
 
 local transparentSymbol = "#"
