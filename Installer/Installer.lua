@@ -159,15 +159,15 @@ if not fs.exists("System/OS/Installer/OK.png") then
 	ecs.progressBar(xBar, yBar, barWidth, 1, 0xcccccc, ecs.colors.blue, 0)
 	os.sleep(timing)
 
-	--local response = getSafe(GitHubUserUrl .. "IgorTimofeev/OpenComputers/master/Applications.txt", "System/OS/Applications.txt")
+	--local response = getSafe(GitHubUserUrl .. "RomanZSeldinov/OpenComputers/main/Applications.txt", "System/OS/Applications.txt")
 	
 	local preLoadApi = {
-		{ paste = "IgorTimofeev/OpenComputers/master/lib/image.lua", path = "lib/image.lua" },
-		--{ paste = "IgorTimofeev/OpenComputers/master/Installer/Languages.png", path = "System/OS/Installer/Languages.png" },
-		{ paste = "IgorTimofeev/OpenComputers/master/Installer/OK.png", path = "System/OS/Installer/OK.png" },
-		{ paste = "IgorTimofeev/OpenComputers/master/Installer/Downloading.png", path = "System/OS/Installer/Downloading.png" },
-		{ paste = "IgorTimofeev/OpenComputers/master/Installer/OS_Logo.png", path = "System/OS/Installer/OS_Logo.png" },
-		{ paste = "IgorTimofeev/OpenComputers/master/MineOS/License.txt", path = "System/OS/License.txt" },
+		{ paste = "RomanZSeldinov/OpenComputers/main/lib/image.lua", path = "lib/image.lua" },
+		--{ paste = "RomanZSeldinov/OpenComputers/main/Installer/Languages.png", path = "System/OS/Installer/Languages.png" },
+		{ paste = "RomanZSeldinov/OpenComputers/main/Installer/OK.png", path = "System/OS/Installer/OK.png" },
+		{ paste = "RomanZSeldinov/OpenComputers/main/Installer/Downloading.png", path = "System/OS/Installer/Downloading.png" },
+		{ paste = "RomanZSeldinov/OpenComputers/main/Installer/OS_Logo.png", path = "System/OS/Installer/OS_Logo.png" },
+		{ paste = "RomanZSeldinov/OpenComputers/main/MineOS/License.txt", path = "System/OS/License.txt" },
 	}
 
 	local countOfAll = #preLoadApi
@@ -185,7 +185,7 @@ if not fs.exists("System/OS/Installer/OK.png") then
 
 end
 
-applications = seri.unserialize(getFromPastebin("3j2x4dDn", "System/OS/Applications.txt"))
+applications = seri.unserialize(getFromPastebin("YYGa9iKC", "System/OS/Applications.txt"))
 
 local image = require("image")
 
