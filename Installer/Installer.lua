@@ -88,7 +88,7 @@ end
 
 local GitHubUserUrl = "https://raw.githubusercontent.com/"
 
-getFromGitHubSafely(GitHubUserUrl .. "IgorTimofeev/OpenComputers/master/lib/ecs.lua", "lib/ecs.lua")
+getFromGitHubSafely(GitHubUserUrl .. "RomanZSeldinov/OpenComputers/main/lib/ecs.lua", "lib/ecs.lua")
 
 local ecs = require("ECSAPI")
 
