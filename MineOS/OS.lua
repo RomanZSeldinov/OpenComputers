@@ -25,7 +25,7 @@ for comp in pairs(components) do if not _G[comp] then _G[comp] = _G.component[co
 libraries, components = nil, nil
 
 -- Загрузка языкового пакета
-local lang = config.readAll("MineOS/System/OS/Languages/" .. "Russian.lang")
+local lang = config.readAll("MineOS/System/OS/Languages/Russian.lang")
 
 ---------------------------------------------- Переменные ------------------------------------------------------------------------
 
@@ -40,8 +40,6 @@ local colors = {
 	background = 0x262626,
 	topBarColor = 0xFFFFFF,
 	topBarTransparency = 35,
-	dockBaseTransparency = 25,
-	dockTransparencyAdder = 15,
 	iconsSelectionColor = ecs.colors.lightBlue,
 	iconsSelectionTransparency = 20,
 }
