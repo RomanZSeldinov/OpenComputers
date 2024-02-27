@@ -30,8 +30,6 @@ local lang = config.readAll("MineOS/System/OS/Languages/" .. "Russian.lang")
 ---------------------------------------------- Переменные ------------------------------------------------------------------------
 
 local workPath = "MineOS/Desktop/"
-local pathOfDockShortcuts = "MineOS/System/OS/Dock/"
-local pathToWallpaper = "MineOS/System/OS/Wallpaper.lnk"
 local currentFileList
 local showHiddenFiles = false
 local showFileFormat = false
@@ -115,37 +113,6 @@ local function drawDesktop()
 	end
 end
 
--- Отрисовка дока
-local function drawDock()
-
-	--Получаем список файлов ярлыком дока
-	local dockShortcuts = ecs.getFileList(pathOfDockShortcuts)
-	currentCountOfIconsInDock = #dockShortcuts
-
-	--Рассчитываем размер и позицию дока на основе размера
-	local widthOfDock = (currentCountOfIconsInDock * (sizes.widthOfIcon + sizes.xSpaceBetweenIcons) - sizes.xSpaceBetweenIcons) + sizes.heightOfDock * 2 + 2
-	local xDock, yDock = math.floor(sizes.xSize / 2 - widthOfDock / 2) + 1, sizes.ySize - sizes.heightOfDock
-
-	--Рисуем сам док
-	local transparency = colors.dockBaseTransparency
-	for i = 1, sizes.heightOfDock do
-		buffer.square(xDock + i, sizes.ySize - i + 1, widthOfDock - i * 2, 1, 0xFFFFFF, 0xFFFFFF, " ", transparency)
-		transparency = transparency + colors.dockTransparencyAdder
-	end
-
-	--Рисуем ярлыки на доке
-	if currentCountOfIconsInDock > 0 then
-		local xIcons = math.floor(sizes.xSize / 2 - ((sizes.widthOfIcon + sizes.xSpaceBetweenIcons) * currentCountOfIconsInDock - sizes.xSpaceBetweenIcons) / 2 ) + 1
-		local yIcons = sizes.ySize - sizes.heightOfDock - 1
-
-		for i = 1, currentCountOfIconsInDock do
-			ecs.drawOSIcon(xIcons, yIcons, pathOfDockShortcuts .. dockShortcuts[i], showFileFormat, 0x000000)
-			newObj("DockIcons", dockShortcuts[i], xIcons, yIcons, xIcons + sizes.widthOfIcon - 1, yIcons + sizes.heightOfIcon - 1)
-			xIcons = xIcons + sizes.xSpaceBetweenIcons + sizes.widthOfIcon
-		end
-	end
-end
-
 -- Нарисовать информацию справа на топбаре
 local function drawTime()
 	local free, total, used = ecs.getInfoAboutRAM()
@@ -178,7 +145,6 @@ end
 
 local function drawAll(force)
 	drawDesktop()
-	drawDock()
 	drawTopBar()
 	buffer.draw(force)
 end
