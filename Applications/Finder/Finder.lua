@@ -8,7 +8,6 @@ local libraries = {
 	["context"] = "context",
 	["unicode"] = "unicode",
 	["buffer"] = "doubleBuffering",
-	["archive"] = "archive",
 	["serialization"] = "serialization",
 }
 
@@ -494,9 +493,6 @@ while true do
 						drawAll()
 					elseif action == "Добавить в архив" then
 						ecs.info("auto", "auto", "", "Архивация файлов...")
-						archive.pack(ecs.hideFileFormat(fs.name(path))..".pkg", path)
-						getFileList(workPathHistory[currentWorkPathHistoryElement])
-						drawAll()
 					elseif action == "Загрузить на Pastebin" then
 						shell.execute("System/Applications/Pastebin.app/Pastebin.lua upload " .. path)
 					elseif action == "Установить как обои" then
