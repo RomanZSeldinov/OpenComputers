@@ -124,18 +124,18 @@ local GitHubUserUrl = "https://raw.githubusercontent.com/"
 
 
 local preLoadApi = {
-  { paste = "IgorTimofeev/OpenComputers/master/lib/ECSAPI.lua", path = "lib/ECSAPI.lua" },
-  { paste = "IgorTimofeev/OpenComputers/master/lib/colorlib.lua", path = "lib/colorlib.lua" },
-  { paste = "IgorTimofeev/OpenComputers/master/lib/image.lua", path = "lib/image.lua" },
-  { paste = "IgorTimofeev/OpenComputers/master/lib/config.lua", path = "lib/config.lua" },
-  { paste = "IgorTimofeev/OpenComputers/master/MineOS/Icons/Languages.pic", path = "MineOS/System/OS/Icons/Languages.pic" },
-  { paste = "IgorTimofeev/OpenComputers/master/MineOS/Icons/OK.pic", path = "MineOS/System/OS/Icons/OK.pic" },
-  { paste = "IgorTimofeev/OpenComputers/master/MineOS/Icons/Downloading.pic", path = "MineOS/System/OS/Icons/Downloading.pic" },
-  { paste = "IgorTimofeev/OpenComputers/master/MineOS/Icons/OS_Logo.pic", path = "MineOS/System/OS/Icons/OS_Logo.pic" },
+  { paste = "RomanZSeldinov/OpenComputers/main/lib/ECSAPI.lua", path = "lib/ECSAPI.lua" },
+  { paste = "RomanZSeldinov/OpenComputers/main/lib/colorlib.lua", path = "lib/colorlib.lua" },
+  { paste = "RomanZSeldinov/OpenComputers/main/lib/image.lua", path = "lib/image.lua" },
+  { paste = "RomanZSeldinov/OpenComputers/main/lib/config.lua", path = "lib/config.lua" },
+  { paste = "RomanZSeldinov/OpenComputers/main/MineOS/Icons/Languages.pic", path = "MineOS/System/OS/Icons/Languages.pic" },
+  { paste = "RomanZSeldinov/OpenComputers/main/MineOS/Icons/OK.pic", path = "MineOS/System/OS/Icons/OK.pic" },
+  { paste = "RomanZSeldinov/OpenComputers/main/MineOS/Icons/Downloading.pic", path = "MineOS/System/OS/Icons/Downloading.pic" },
+  { paste = "RomanZSeldinov/OpenComputers/main/MineOS/Icons/OS_Logo.pic", path = "MineOS/System/OS/Icons/OS_Logo.pic" },
 }
 
 print("Downloading file list")
-applications = seri.unserialize(getFromGitHubSafely(GitHubUserUrl .. "IgorTimofeev/OpenComputers/master/Applications.txt", "MineOS/System/OS/Applications.txt"))
+applications = seri.unserialize(getFromGitHubSafely(GitHubUserUrl .. "RomanZSeldinov/OpenComputers/main/Applications.txt", "MineOS/System/OS/Applications.txt"))
 print(" ")
 
 for i = 1, #preLoadApi do
@@ -224,8 +224,8 @@ do
   --Качаем язык
   ecs.info("auto", "auto", " ", " Installing language packages...")
   local pathToLang = "MineOS/System/OS/Installer/Language.lang"
-  getFromGitHubSafely(GitHubUserUrl .. "IgorTimofeev/OpenComputers/master/Installer/" .. _G.OSSettings.language .. ".lang", pathToLang)
-  getFromGitHubSafely(GitHubUserUrl .. "IgorTimofeev/OpenComputers/master/MineOS/License/" .. _G.OSSettings.language .. ".txt", "MineOS/System/OS/License.txt")
+  getFromGitHubSafely(GitHubUserUrl .. "RomanZSeldinov/OpenComputers/main/Installer/" .. _G.OSSettings.language .. ".lang", pathToLang)
+  getFromGitHubSafely(GitHubUserUrl .. "RomanZSeldinov/OpenComputers/main/MineOS/License/" .. _G.OSSettings.language .. ".txt", "MineOS/System/OS/License.txt")
   
   --Ставим язык
   lang = config.readAll(pathToLang)
