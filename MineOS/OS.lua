@@ -35,13 +35,11 @@ local showHiddenFiles = false
 local showFileFormat = false
 local sortingMethod = "type"
 local wallpaper
-local currentCountOfIconsInDock
 
 local colors = {
 	background = 0x262626,
 	topBarColor = 0xFFFFFF,
 	topBarTransparency = 35,
-	dockColor = 0xDDDDDD,
 	dockBaseTransparency = 25,
 	dockTransparencyAdder = 15,
 	iconsSelectionColor = ecs.colors.lightBlue,
