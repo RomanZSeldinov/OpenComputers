@@ -262,14 +262,14 @@ while true do
 
 					-- Разные контекстные меню
 					if fileFormat == ".app" and fs.isDirectory(path) then
-						action = context.menu(eventData[3], eventData[4], {lang.contextShowContent}, "-", {lang.contextCopy, false, "^C"}, {lang.contextPaste, not _G.clipboard, "^V"}, "-", {lang.contextRename}, {lang.contextCreateShortcut}, "-",  {lang.contextUploadToPastebin, true}, "-", {lang.contextAddToDock, not (currentCountOfIconsInDock < sizes.dockCountOfIcons and workPath ~= "MineOS/System/OS/Dock/")}, {lang.contextDelete, false, "⌫"})
+						action = context.menu(eventData[3], eventData[4], {lang.contextShowContent}, "-", {lang.contextCopy, false, "^C"}, {lang.contextPaste, not _G.clipboard, "^V"}, "-", {lang.contextRename}, {lang.contextCreateShortcut}, "-",  {lang.contextUploadToPastebin, true}, {lang.contextDelete, false, "⌫"})
 					elseif fileFormat ~= ".app" and fs.isDirectory(path) then
 						action = context.menu(eventData[3], eventData[4], {lang.contextCopy, false, "^C"}, {lang.contextPaste, not _G.clipboard, "^V"}, "-", {lang.contextRename}, {lang.contextCreateShortcut}, "-", {lang.contextUploadToPastebin, true}, "-", {lang.contextDelete, false, "⌫"})
 					else
 						if fileFormat == ".pic" then
-							action = context.menu(eventData[3], eventData[4], {lang.contextEdit}, {"Установить как обои"},"-", {lang.contextCopy, false, "^C"}, {lang.contextPaste, not _G.clipboard, "^V"}, "-", {lang.contextRename}, {lang.contextCreateShortcut}, "-", {lang.contextUploadToPastebin, true}, "-", {lang.contextAddToDock, not (currentCountOfIconsInDock < sizes.dockCountOfIcons and workPath ~= "MineOS/System/OS/Dock/")}, {lang.contextDelete, false, "⌫"})
+							action = context.menu(eventData[3], eventData[4], {lang.contextEdit}, {"Установить как обои"},"-", {lang.contextCopy, false, "^C"}, {lang.contextPaste, not _G.clipboard, "^V"}, "-", {lang.contextRename}, {lang.contextCreateShortcut}, "-", {lang.contextUploadToPastebin, true}, {lang.contextDelete, false, "⌫"})
 						else
-							action = context.menu(eventData[3], eventData[4], {lang.contextEdit}, "-", {lang.contextCopy, false, "^C"}, {lang.contextPaste, not _G.clipboard, "^V"}, "-", {lang.contextRename}, {lang.contextCreateShortcut}, "-", {lang.contextUploadToPastebin, true}, "-", {lang.contextAddToDock, not (currentCountOfIconsInDock < sizes.dockCountOfIcons and workPath ~= "MineOS/System/OS/Dock/")}, {lang.contextDelete, false, "⌫"})
+							action = context.menu(eventData[3], eventData[4], {lang.contextEdit}, "-", {lang.contextCopy, false, "^C"}, {lang.contextPaste, not _G.clipboard, "^V"}, "-", {lang.contextRename}, {lang.contextCreateShortcut}, "-", {lang.contextUploadToPastebin, true}, {lang.contextDelete, false, "⌫"})
 						end
 					end
 
@@ -293,9 +293,6 @@ while true do
 					elseif action == lang.contextCreateShortcut then
 						ecs.createShortCut(workPath .. ecs.hideFileFormat(path) .. ".lnk", path)
 						drawAll()
-					elseif action == lang.contextAddToDock then
-						ecs.createShortCut("MineOS/System/OS/Dock/" .. ecs.hideFileFormat(path) .. ".lnk", path)
-						drawAll()
 					elseif action == "Установить как обои" then
 						ecs.createShortCut(pathToWallpaper, path)
 						changeWallpaper()
@@ -303,40 +300,6 @@ while true do
 					else
 						buffer.paste(obj["DesktopIcons"][key][1], obj["DesktopIcons"][key][2], oldPixelsOfIcon)
 						buffer.draw()
-					end
-				end
-
-				clickedAtEmptyArea = false
-
-				break
-			end
-		end
-
-		for key in pairs(obj["DockIcons"]) do
-			if ecs.clickedAtArea(eventData[3], eventData[4], obj["DockIcons"][key][1], obj["DockIcons"][key][2], obj["DockIcons"][key][3], obj["DockIcons"][key][4]) then
-
-				local oldPixelsOfIcon = buffer.copy(obj["DockIcons"][key][1], obj["DockIcons"][key][2], sizes.widthOfIcon, sizes.heightOfIcon)
-
-				buffer.square(obj["DockIcons"][key][1], obj["DockIcons"][key][2], sizes.widthOfIcon, sizes.heightOfIcon, colors.iconsSelectionColor, 0xFFFFFF, " ", colors.iconsSelectionTransparency)
-				ecs.drawOSIcon(obj["DockIcons"][key][1], obj["DockIcons"][key][2], pathOfDockShortcuts .. key, false, 0xffffff)
-				buffer.draw()
-
-				if eventData[5] == 0 then
-					os.sleep(0.2)
-					ecs.launchIcon(pathOfDockShortcuts .. key)
-					drawAll(true)
-				else
-					local content = ecs.readShortcut(pathOfDockShortcuts .. key)
-
-					action = context.menu(eventData[3], eventData[4], {lang.contextRemoveFromDock, not (currentCountOfIconsInDock > 1)})
-
-					if action == lang.contextRemoveFromDock then
-						fs.remove(pathOfDockShortcuts .. key)
-						drawAll()
-					else
-						buffer.paste(obj["DockIcons"][key][1], obj["DockIcons"][key][2], oldPixelsOfIcon)
-						buffer.draw()
-						oldPixelsOfIcon = nil
 					end
 				end
 
