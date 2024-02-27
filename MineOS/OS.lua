@@ -14,8 +14,6 @@ local libraries = {
 	config = "config",
 	context = "context",
 	buffer = "doubleBuffering",
-	image = "image",
-	SHA2 = "SHA2",
 }
 
 local components = {
@@ -78,23 +76,13 @@ end
 
 --Изменение обоев из файла обоев
 local function changeWallpaper()
-	wallpaper = nil
-	if fs.exists(pathToWallpaper) then
-		local path = ecs.readShortcut(pathToWallpaper)
-		if fs.exists(path) then
-			wallpaper = image.load(path)
-		end
-	end
+	buffer.square(1, 1, sizes.xSize, sizes.ySize, colors.background, 0xFFFFFF, " ")
 end
 changeWallpaper()
 
 --Загрузка обоев или статичного фона
 local function drawWallpaper()
-	if wallpaper then
-		buffer.image(1, 1, wallpaper)
-	else
-		buffer.square(1, 1, sizes.xSize, sizes.ySize, colors.background, 0xFFFFFF, " ")
-	end
+	buffer.square(1, 1, sizes.xSize, sizes.ySize, colors.background, 0xFFFFFF, " ")
 end
 
 --ОТРИСОВКА ИКОНОК НА РАБОЧЕМ СТОЛЕ ПО ТЕКУЩЕЙ ПАПКЕ
@@ -205,7 +193,7 @@ local function requestPassword()
 				if data[1] == data[2] then
 
 					_G.OSSettings.protectionMethod = "password"
-					_G.OSSettings.passwordHash = SHA2.hash(data[1])
+					_G.OSSettings.passwordHash = data[1]
 					break
 				else
 					ecs.error("Пароли различаются. Повторите ввод.")
@@ -220,7 +208,7 @@ local function requestPassword()
 	elseif _G.OSSettings.protectionMethod == "password" then
 		while true do
 			local data = ecs.universalWindow("auto", "auto", 30, ecs.windowColors.background, true, {"EmptyLine"}, {"CenterText", 0x000000, "Вход в систему"}, {"EmptyLine"}, {"Input", 0x262626, 0x880000, "Пароль"}, {"EmptyLine"}, {"Button", {0xbbbbbb, 0xffffff, "OK"}})
-			if SHA2.hash(data[1]) == _G.OSSettings.passwordHash then
+			if data[1] == _G.OSSettings.passwordHash then
 				return true
 			else
 				ecs.error("Неверный пароль!")
